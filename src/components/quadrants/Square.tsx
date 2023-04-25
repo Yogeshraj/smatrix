@@ -3,86 +3,9 @@ import DragIcon from "../Icons/DragIcon";
 import SelectIcon from "../Icons/SelectIcon";
 import RemoveIcon from "../Icons/RemoveIcon";
 import { SquareProps } from "@/interfaces/interfaces";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-
-// import dynamic from "next/dynamic";
-
-// const DragDropContext = dynamic(
-//   () =>
-//     import("react-beautiful-dnd").then((mod) => {
-//       return mod.DragDropContext;
-//     }),
-//   { ssr: false }
-// );
-// const Droppable = dynamic(
-//   () =>
-//     import("react-beautiful-dnd").then((mod) => {
-//       return mod.Droppable;
-//     }),
-//   { ssr: false }
-// );
-// const Draggable = dynamic(
-//   () =>
-//     import("react-beautiful-dnd").then((mod) => {
-//       return mod.Draggable;
-//     }),
-//   { ssr: false }
-// );
-
-const finalSpaceCharacters = [
-  {
-    id: "g-1",
-    content: "Complete Google UX Course",
-    displayPosition: 1,
-  },
-  {
-    id: "g-4",
-    content: "Complete LeetCode",
-    displayPosition: 4,
-  },
-  {
-    id: "g-2",
-    content: "Complete udemy Course",
-    displayPosition: 2,
-  },
-  {
-    id: "g-3",
-    content: "Complete eDX Course",
-    displayPosition: 3,
-  },
-  {
-    id: "g-5",
-    content: "Commit Changes to Git",
-    displayPosition: 5,
-  },
-];
-
-const Square: FC<SquareProps> = ({ color, title, subtitle, children }) => {
-  const [characters, updateCharacters] = useState(finalSpaceCharacters);
-
-  const resetDisplayPositions = (list: any) => {
-    const resetList = list.map((c: any, index: number) => {
-      const slide = c;
-      slide.displayPosition = index + 1;
-      return slide;
-    });
-    updateCharacters(resetList);
-    console.log(resetList);
-  };
-
-  function handleOnDragEnd(result: any) {
-    if (!result.destination) return;
-
-    const items = Array.from(characters);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    resetDisplayPositions(items);
-
-    // updateCharacters(items);
-  }
-
+const Square: FC<SquareProps> = ({ color, title, subtitle, boardID, tasks }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -91,7 +14,7 @@ const Square: FC<SquareProps> = ({ color, title, subtitle, children }) => {
 
   return (
     <div
-      className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 min-h-[360px]`}>
+      className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 min-h-[402px]`}>
       <div className='flex flex-col'>
         <div
           className={`flex border-b border-${color}-400 justify-between p-2 pt-0`}>
@@ -99,19 +22,17 @@ const Square: FC<SquareProps> = ({ color, title, subtitle, children }) => {
           <div className={`text-${color}-700`}>{subtitle}</div>
         </div>
 
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          {isMounted ? (
-            <Droppable droppableId='characters'>
-              {(provided) => (
-                <div
-                  className='characters'
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}>
-                  {characters
-                  .sort((a, b)=> a.displayPosition - b.displayPosition)
-                  .map(({ id, content }, index) => {
+        {isMounted ? (
+          <Droppable droppableId={title}>
+            {(provided) => (
+              <div
+                className='characters'
+                {...provided.droppableProps}
+                ref={provided.innerRef}>
+                {tasks
+                  .map(({ id, title }, index) => {
                     return (
-                      <Draggable key={id} draggableId={id} index={index}>
+                      <Draggable key={id} draggableId={id.toString()} index={index}>
                         {(provided) => (
                           <div
                             className='rounded-[10px] border-white border-2 bg-half-white p-1.5 my-2.5 flex justify-between cursor-grab'
@@ -120,7 +41,7 @@ const Square: FC<SquareProps> = ({ color, title, subtitle, children }) => {
                             {...provided.dragHandleProps}>
                             <div className='flex'>
                               <DragIcon className='mr-3.5 cursor-grab' />
-                              <div className='half-black'>{content}</div>
+                              <div className='half-black'>{title}</div>
                             </div>
 
                             <div className='flex'>
@@ -132,12 +53,11 @@ const Square: FC<SquareProps> = ({ color, title, subtitle, children }) => {
                       </Draggable>
                     );
                   })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          ) : null}
-        </DragDropContext>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        ) : null}
       </div>
     </div>
   );

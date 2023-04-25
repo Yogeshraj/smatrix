@@ -1,12 +1,20 @@
-import { ReactNode } from "react";
+import { ColumnType } from "@/utils/enums";
 
 export interface IconProps {
-    className?: string,
+  className?: string;
 }
 
 export interface SquareProps {
-    color: string;
-    title: string;
-    subtitle: string;
-    children: ReactNode;
-  }
+  color: string;
+  title: string;
+  subtitle: string;
+  boardID: number;
+  tasks: initialTasksProps[];
+}
+export interface initialTasksProps {
+  id: any;
+  title: string;
+  boardID: number;
+  completed: boolean;
+  displayPosition: number;
+}
