@@ -4,7 +4,7 @@ import useStore from "@/store/store";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { mainData, fetchLocalStorage, deleteTask } = useStore();
+  const { mainData, fetchLocalStorage, deleteTask }:any = useStore();
 
   useEffect(() => {
     fetchLocalStorage();

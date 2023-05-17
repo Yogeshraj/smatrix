@@ -16,14 +16,14 @@ const useStore = create(
         console.log(result);
       },
       fetchLocalStorage() {
-        let getData = localStorage?.getItem("Data");
+        let getData = localStorage?.getItem("Data") || '';
         if (getData) {
-          set((state) => ({
+          set((state: any) => ({
             ...state,
             mainData: JSON.parse(getData),
           }));
         } else {
-          set((state) => ({
+          set((state: any) => ({
             ...state,
             mainData: [],
           }));

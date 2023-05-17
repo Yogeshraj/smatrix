@@ -9,7 +9,7 @@ const InputForm = () => {
   const [tasks, updateTasks] = useState();
   const { register, handleSubmit } = useForm();
 
-  const { mainData, fetchLocalStorage, updateData } = useStore();
+  const { mainData, fetchLocalStorage, updateData }:any = useStore();
   useEffect(() => {
     fetchLocalStorage();
   }, []);

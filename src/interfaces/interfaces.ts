@@ -2,16 +2,16 @@ import { ColumnType } from "@/utils/enums";
 
 export interface IconProps {
   className?: string;
-  onClick(): any
+  onClick?: any
 }
 
 export interface SquareProps {
   color: string;
-  title: string;
+  boardTitle: string;
   subtitle: string;
   // boardID: number;
   tasks: initialTasksProps[];
-  deleteTask(): any
+  deleteTask: any
 }
 export interface initialTasksProps {
   id: any;

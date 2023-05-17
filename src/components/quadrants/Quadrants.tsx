@@ -12,10 +12,10 @@ const Quadrants = ({ mainData, fetchLocalStorage, deleteTask }: any) => {
     updateTasks(mainData);
   }, [mainData]);
 
-  const handleDeleteTask = (id, boardName) => {
+  const handleDeleteTask = (id:any, boardName:any) => {
     console.log(id, boardName);
     console.log(mainData);
-    let deletedData = mainData[boardName].filter((res)=> {
+    let deletedData = mainData[boardName].filter((res:any)=> {
       console.log(res);
       return res.id !== id
     });
@@ -71,7 +71,7 @@ const Quadrants = ({ mainData, fetchLocalStorage, deleteTask }: any) => {
       const destinationdroppableId = destination.droppableId;
       const sourcedroppableId = source.droppableId;
 
-      sourceItems.filter((item) => {
+      sourceItems.filter((item:any) => {
         item.id === result.draggableId;
       });
       const [reorderedItem] = sourceItems.splice(result.source.index, 1);
