@@ -1,9 +1,10 @@
 import { IconProps } from "@/interfaces/interfaces";
 
-const RemoveIcon = ({ className }: IconProps) => {
+const RemoveIcon = ({ className, onClick }: IconProps) => {
   return (
     <svg
       className={className}
+      onClick={onClick}
       width='24'
       height='24'
       viewBox='0 0 24 24'

@@ -23,7 +23,8 @@
     "react-hook-form": "^7.43.9",
     "tailwindcss": "3.3.1",
     "typescript": "5.0.3",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.4",

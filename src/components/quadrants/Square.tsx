@@ -5,7 +5,7 @@ import RemoveIcon from "../Icons/RemoveIcon";
 import { SquareProps } from "@/interfaces/interfaces";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 
-const Square: FC<SquareProps> = ({ color, title, subtitle, boardID, tasks }) => {
+const Square: FC<SquareProps> = ({ color, boardTitle, subtitle, tasks, deleteTask }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -18,19 +18,18 @@ const Square: FC<SquareProps> = ({ color, title, subtitle, boardID, tasks }) => 
       <div className='flex flex-col'>
         <div
           className={`flex border-b border-${color}-400 justify-between p-2 pt-0`}>
-          <div className={`text-${color}-700 font-semibold`}>{title}</div>
+          <div className={`text-${color}-700 font-semibold`}>{boardTitle}</div>
           <div className={`text-${color}-700`}>{subtitle}</div>
         </div>
 
         {isMounted ? (
-          <Droppable droppableId={title}>
+          <Droppable droppableId={boardTitle}>
             {(provided) => (
               <div
-                className='characters'
+                className='characters min-h-[347px]'
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
-                {tasks
-                  .map(({ id, title }, index) => {
+                {tasks?.map(({ id, title }, index) => {
                     return (
                       <Draggable key={id} draggableId={id.toString()} index={index}>
                         {(provided) => (
@@ -46,7 +45,7 @@ const Square: FC<SquareProps> = ({ color, title, subtitle, boardID, tasks }) => 
 
                             <div className='flex'>
                               <SelectIcon className='mr-2.5 cursor-pointer' />
-                              <RemoveIcon className='cursor-pointer' />
+                              <RemoveIcon className='cursor-pointer' onClick={()=>deleteTask(id, boardTitle)} />
                             </div>
                           </div>
                         )}
