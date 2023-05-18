@@ -1,13 +1,19 @@
 import { create } from "zustand";
-import { initialTasks } from "@/mockData/mockData";
-import { v4 as uuidv4 } from "uuid";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 const useStore = create(
   persist(
-    (set, get) => ({
+    (set:any) => ({
       websiteName: "Smatrix",
+
       mainData: [],
+
+      snackbar: {
+        show: false,
+        content: "",
+        type: "",
+      },
+
       async fetchData() {
         const data = await fetch(
           "https://62b59b5e42c6473c4b362f18.mockapi.io/users"
@@ -15,54 +21,47 @@ const useStore = create(
         const result = await data.json();
         console.log(result);
       },
-      fetchLocalStorage() {
-        let getData = localStorage?.getItem("Data") || '';
-        if (getData) {
-          set((state: any) => ({
-            ...state,
-            mainData: JSON.parse(getData),
-          }));
-        } else {
-          set((state: any) => ({
-            ...state,
-            mainData: [],
-          }));
-        }
-      },
-      updateData: (data: any, boardName: any) => {
+
+      updateData: (task: any) => {
         set((state: any) => ({
           ...state,
-          mainData: {
-            ...state.mainData,
-            [boardName]: [
-             ...state.mainData[boardName] || [],
-              {
-                id: uuidv4(),
-                title: data.inputText,
-                completed: false,
-              },
-            ],
+          mainData: task,
+          snackbar: {
+            show: true,
+            content: "Success added!",
+            type: "success",
           },
         }));
       },
 
-      deleteTask: (id: any, boardName: any) => {
+      deleteTask: (task: any) => {
         set((state: any) => ({
           ...state,
-          mainData: {
-            ...state.mainData,
-            [boardName]: [
-             ...state.mainData[boardName] || [],
-             delete state.mainData[boardName].id === id
-            ],
+          mainData: task,
+          snackbar: {
+            show: true,
+            content: "Deleted Successfully!",
+            type: "success",
           },
         }));
-      }
+      },
+      
+      resetSnackbar: () => {
+        set((state: any) => ({
+          ...state,
+          snackbar: {
+            show: false,
+            content: "",
+            type: "",
+          },
+        }));
+      },
     }),
 
     {
       name: "answer-storage", // unique name
-      getStorage: () => localStorage, // (optional) by default the 'localStorage' is used
+      // getStorage: () => localStorage, // (optional) by default the 'localStorage' is used
+      storage: createJSONStorage(() => localStorage), 
     }
   )
 );

@@ -21,7 +21,7 @@ const Navbar = () => {
             </div>
           </div>
 
-
+          {/* TODO: Login Menu */}
           {/* <div className='flex items-center flex-wrap'>
             <Image src={Logo} alt='Logo' />
             <div className='active ml-14 p-2 flex flex-wrap cursor-pointer [&.active]:bg-purple hover:bg-purple hover:text-meteorite-blue rounded-[10px] transition-all after:content-[""] after:absolute after:-bottom-4 after:bg-purple after:w-full after:h-1 after:left-0 after:rounded-t-lg relative after:hidden [&.active]:after:block text-grey [&.active]:text-meteorite-blue group'>

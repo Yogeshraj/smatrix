@@ -1,14 +1,10 @@
 import Quadrants from "@/components/quadrants/Quadrants";
 import Sidebar from "@/components/sidebar/Sidebar";
+import SnackbarLayout from "@/components/snackbar/SnackbarLayout";
 import useStore from "@/store/store";
-import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { mainData, fetchLocalStorage, deleteTask }:any = useStore();
-
-  useEffect(() => {
-    fetchLocalStorage();
-  }, [fetchLocalStorage]);
+  const { mainData, deleteTask, snackbar, resetSnackbar, updateData }: any = useStore();
 
   if (!mainData) {
     return "Loading";
@@ -17,9 +13,14 @@ export default function Home() {
   return (
     <div className='container'>
       <div className='grid grid-cols-[72%_27%] gap-4'>
-        <Quadrants mainData={mainData} fetchLocalStorage={fetchLocalStorage} deleteTask={deleteTask} />
+        <Quadrants
+          mainData={mainData}
+          deleteTask={deleteTask}
+          updateData={updateData}
+        />
         <Sidebar />
       </div>
+      <SnackbarLayout snackbarProperties={snackbar} resetSnackbar={resetSnackbar} />
     </div>
   );
 }

@@ -1,13 +1,23 @@
-import React, { useState, InputHTMLAttributes, FC } from "react";
+import React, { useState, InputHTMLAttributes, FC, useEffect } from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   register: UseFormRegister<FieldValues>; // declare register props
+  isSubmitSuccessful: boolean
 }
 
-const ToogleSwitch: FC<InputProps> = ({ register, id }) => {
+const ToogleSwitch: FC<InputProps> = ({ register, id, isSubmitSuccessful }) => {
   const [enabled, setEnabled] = useState(false);
+
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      setEnabled(false);
+    }
+  }, [isSubmitSuccessful])
+
+
   return (
     <div className='relative flex flex-col items-center justify-center overflow-hidden'>
       <div className='flex items-center'>

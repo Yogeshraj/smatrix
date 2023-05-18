@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ToogleSwitch from "../toogleSwtich/ToogleSwitch";
 import AddIcon from "../Icons/AddIcon";
 import { useForm } from "react-hook-form";
@@ -6,13 +6,15 @@ import { v4 as uuidv4 } from "uuid";
 import useStore from "@/store/store";
 
 const InputForm = () => {
-  const [tasks, updateTasks] = useState();
-  const { register, handleSubmit } = useForm();
 
-  const { mainData, fetchLocalStorage, updateData }:any = useStore();
-  useEffect(() => {
-    fetchLocalStorage();
-  }, []);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitSuccessful },
+  } = useForm();
+
+  const { mainData, updateData }: any = useStore();
 
   const onSubmit = (data: any) => {
     let boardName;
@@ -27,30 +29,22 @@ const InputForm = () => {
       boardName = "Limit";
     }
 
-
-    // let constructData = {
-    //   ...mainData,
-    //   [boardName]: [
-    //     ...mainData[boardName],
-    //     {
-    //       id: uuidv4(),
-    //       title: inputText,
-    //       completed: false,
-    //     },
-    //   ],
-    // };
-
-    updateData(data, boardName);
-
-    console.log(mainData);
-
-    // localStorage.setItem(
-    //   "Data",
-    //   JSON.stringify(constructData)
-    // );
-
-    // console.log(constructData);
+    let addNewTask = [
+      ...(mainData[boardName] || []),
+      {
+        id: uuidv4(),
+        title: inputText,
+        completed: false,
+      },
+    ];
+    updateData({ ...mainData, [boardName]: addNewTask });
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful]);
 
   return (
     <form
@@ -66,14 +60,22 @@ const InputForm = () => {
         <div className='p-2 flex-1 flex flex-col border-r-2 border-half-white'>
           <div className='text-[11px] mb-2'>Important</div>
           <div className='bg-half-white rounded-xl border-white border-2 p-2'>
-            <ToogleSwitch register={register} id='important' />
+            <ToogleSwitch
+              register={register}
+              id='important'
+              isSubmitSuccessful={isSubmitSuccessful}
+            />
           </div>
         </div>
 
         <div className='p-2 flex-1 flex flex-col'>
           <div className='text-[11px] mb-2'>Urgent</div>
           <div className='bg-half-white rounded-xl border-white border-2 p-2'>
-            <ToogleSwitch register={register} id='urgent' />
+            <ToogleSwitch
+              register={register}
+              id='urgent'
+              isSubmitSuccessful={isSubmitSuccessful}
+            />
           </div>
         </div>
       </div>
