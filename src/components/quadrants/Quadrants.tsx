@@ -1,34 +1,20 @@
 import { DragDropContext } from "react-beautiful-dnd";
 import Square from "./Square";
-import { useEffect, useState } from "react";
-import { initialTasks, boards } from "@/mockData/mockData";
+import { boards } from "@/mockData/mockData";
 import { ColumnType } from "@/utils/enums";
-import useStore from "@/store/store";
 
-const Quadrants = ({ mainData, fetchLocalStorage, deleteTask }: any) => {
-  const [tasks, updateTasks] = useState(mainData);
-  
-  useEffect(() => {
-    updateTasks(mainData);
-  }, [mainData]);
-
-  const handleDeleteTask = (id:any, boardName:any) => {
+const Quadrants = ({ mainData, deleteTask, updateData }: any) => {
+  const handleDeleteTask = (id: any, boardName: any) => {
     console.log(id, boardName);
     console.log(mainData);
-    let deletedData = mainData[boardName].filter((res:any)=> {
+    let deletedData = mainData[boardName].filter((res: any) => {
       console.log(res);
-      return res.id !== id
+      return res.id !== id;
     });
-    updateTasks({ ...tasks, [boardName]: deletedData });
-    localStorage.setItem(
-      "Data",
-      JSON.stringify({ ...tasks, [boardName]: deletedData })
-    );
-    fetchLocalStorage();
+    deleteTask({ ...mainData, [boardName]: deletedData });
   };
 
   function handleOnDragEnd(result: any) {
-    // console.log(result);
     const { source, destination } = result;
 
     // If user tries to drop in an unknown destination
@@ -44,63 +30,41 @@ const Quadrants = ({ mainData, fetchLocalStorage, deleteTask }: any) => {
     // If the user drops within the same column but in a different position
     if (source.droppableId === destination.droppableId) {
       const sourceItems = Array.from(
-        tasks[source.droppableId as keyof typeof ColumnType] || []
+        mainData[source.droppableId as keyof typeof ColumnType] || []
       );
       const droppableId = source.droppableId;
       const [reorderedItem] = sourceItems.splice(result.source.index, 1);
       sourceItems.splice(result.destination.index, 0, reorderedItem);
 
-      updateTasks({ ...tasks, [droppableId]: sourceItems });
-      localStorage.setItem(
-        "Data",
-        JSON.stringify({ ...tasks, [droppableId]: sourceItems })
-      );
-      fetchLocalStorage();
+      updateData({ ...mainData, [droppableId]: sourceItems });
       return;
     }
 
     if (source.droppableId !== destination.droppableId) {
-      console.log('first');
       const sourceItems = Array.from(
-        tasks[source.droppableId as keyof typeof ColumnType] || []
+        mainData[source.droppableId as keyof typeof ColumnType] || []
       );
       const destinationItems = Array.from(
-        tasks[destination.droppableId as keyof typeof ColumnType] || []
+        mainData[destination.droppableId as keyof typeof ColumnType] || []
       );
 
       const destinationdroppableId = destination.droppableId;
       const sourcedroppableId = source.droppableId;
 
-      sourceItems.filter((item:any) => {
+      sourceItems.filter((item: any) => {
         item.id === result.draggableId;
       });
       const [reorderedItem] = sourceItems.splice(result.source.index, 1);
       destinationItems.splice(result.destination.index, 0, reorderedItem);
 
-      updateTasks({
-        ...tasks,
+      updateData({
+        ...mainData,
         [sourcedroppableId]: sourceItems,
         [destinationdroppableId]: destinationItems,
       });
-      localStorage.setItem(
-        "Data",
-        JSON.stringify({
-          ...tasks,
-          [sourcedroppableId]: sourceItems,
-          [destinationdroppableId]: destinationItems,
-        })
-      );
-      fetchLocalStorage();
       return;
     }
   }
-
-  // useEffect(() => {
-  //   let getData = localStorage?.getItem("Data")!;
-  //   if (getData) {
-  //     updateTasks(JSON.parse(getData));
-  //   }
-  // }, []);
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -112,9 +76,9 @@ const Quadrants = ({ mainData, fetchLocalStorage, deleteTask }: any) => {
               color={board.boardColor}
               boardTitle={board.boardTitle}
               subtitle={board.boardSubtitle}
-              // boardID={board.boardID}
               tasks={
-                tasks && tasks[board.boardTitle as keyof typeof ColumnType]
+                mainData &&
+                mainData[board.boardTitle as keyof typeof ColumnType]
               }
               deleteTask={handleDeleteTask}
             />
