@@ -6,23 +6,23 @@ const Alltasks = () => {
 
   // TODO: Define props as proper StateProperties
   const [tasks, setTasks] = useState<string[]>([]);
-
+  
   useEffect(() => {
-    boards.map((data: any) => {
+    boards.length > 0 && boards?.map((data: any) => {
       setTasks((prevState) => [...prevState, mainData[data]]);
     });
-  }, [mainData, boards]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   return (
     <div className='container'>
       <div className='py-5'>
         <div className='text-xl font-bold mb-5'>All Tasks</div>
-        {tasks &&
+        {tasks.length > 0 &&
           tasks.map((task: any, index: number) => {
             return (
               <React.Fragment key={index}>
-                {task.map((data: any) => {
-                  console.log(data);
+                {task?.map((data: any) => {
                   return (
                     <div
                       key={data.id}
