@@ -35,6 +35,7 @@ const InputForm = () => {
         id: uuidv4(),
         title: inputText,
         completed: false,
+        boardName
       },
     ];
     updateData({ ...mainData, [boardName]: addNewTask });

@@ -3,11 +3,12 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 const useStore = create(
   persist(
-    (set:any) => ({
+    (set: any) => ({
       websiteName: "Smatrix",
+      
+      boards: ['Do', 'Schedule', 'Delegate', 'Limit'],
 
       mainData: [],
-
       snackbar: {
         show: false,
         content: "",
@@ -45,7 +46,7 @@ const useStore = create(
           },
         }));
       },
-      
+
       resetSnackbar: () => {
         set((state: any) => ({
           ...state,
@@ -61,7 +62,7 @@ const useStore = create(
     {
       name: "answer-storage", // unique name
       // getStorage: () => localStorage, // (optional) by default the 'localStorage' is used
-      storage: createJSONStorage(() => localStorage), 
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

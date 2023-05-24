@@ -24,7 +24,21 @@ const ToogleSwitch: FC<InputProps> = ({ register, id, isSubmitSuccessful }) => {
         <span className='mr-2 text-xs font-medium text-gray-900'>No</span>
         <label className='inline-flex relative items-center cursor-pointer'>
           <input
-            type='checkbox'
+            type='radio'
+            className='sr-only peer'
+            checked={enabled}
+            readOnly
+            {...register(id)}
+          />
+          <input
+            type='radio'
+            className='sr-only peer'
+            checked={enabled}
+            readOnly
+            {...register(id)}
+          />
+          <input
+            type='radio'
             className='sr-only peer'
             checked={enabled}
             readOnly
