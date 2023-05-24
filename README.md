@@ -1,41 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Smatrix
 
-First, run the development server:
+This app involves making a quick decision about what to act on now either by doing it yourself or delegating to someone else, what to act on in the future, or what to drop from your to-do list.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+**How to Apply this Technique** <br />
+We all have an ever-growing to-do list, and PMs are certainly no exception. Because our responsibilities and demands limit our time, we have to choose carefully how we spend this precious resource to make sure that we align our tasks with our larger goals.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To get started with this technique, look at your to-do list at the beginning of the workday and assess which tasks can be done quickly right now either by you or someone else on your team, which ones to drop altogether, and which essential tasks to defer for now.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Give it a try to the beta version https://smatrix.netlify.app/ (beta)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![MIT License](https://img.shields.io/badge/pre--production-beta-yellow)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech Stack
 
-## Learn More
+[![ReactJs](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![NextJs](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/) [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![TypeScript](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=Zustand&logoColor=white)](https://www.zustand-demo.pmnd.rs/)
 
-To learn more about Next.js, take a look at the following resources:
+## Badges
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
+## Deployed on Netlify
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f274dc6d-3739-4081-8803-6f4646714556/deploy-status)](https://app.netlify.com/sites/smatrix/deploys)
+## Feedback
+
+Please send your valuable feedbacks in twitter 
+
+[![Twitter Contact](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Yogesh_Raj_46)
