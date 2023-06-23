@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ToogleSwitch from "../toogleSwtich/ToogleSwitch";
 import AddIcon from "../Icons/AddIcon";
 import { useForm } from "react-hook-form";
@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import useStore from "@/store/store";
 
 const InputForm = () => {
-
   const {
     register,
     handleSubmit,
@@ -16,17 +15,43 @@ const InputForm = () => {
 
   const { mainData, updateData }: any = useStore();
 
+  const [radioState, setRadioState] = useState({
+    important: 2,
+    urgent: 2,
+  });
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+      setRadioState({
+        important: 2,
+        urgent: 2,
+      });
+    }
+  }, [isSubmitSuccessful]);
+
   const onSubmit = (data: any) => {
     let boardName;
     const { inputText, important, urgent } = data;
-    if (important && urgent) {
+
+    if (important === "yes" && urgent === "yes") {
       boardName = "Do";
-    } else if (important && !urgent) {
+    } else if (important === "yes" && urgent === "no") {
       boardName = "Schedule";
-    } else if (!important && urgent) {
+    } else if (important === "no" && urgent === "yes") {
       boardName = "Delegate";
-    } else {
+    } else if (important === "no" && urgent === "no") {
       boardName = "Limit";
+    } else if (important === "yes" && urgent === "neutral") {
+      boardName = "Schedule";
+    } else if (important === "no" && urgent === "neutral") {
+      boardName = "Limit";
+    } else if (important === "neutral" && urgent === "yes") {
+      boardName = "Delegate";
+    } else if (important === "neutral" && urgent === "no") {
+      boardName = "Limit";
+    } else {
+      boardName = "Later";
     }
 
     let addNewTask = [
@@ -35,47 +60,43 @@ const InputForm = () => {
         id: uuidv4(),
         title: inputText,
         completed: false,
-        boardName
+        boardName,
       },
     ];
     updateData({ ...mainData, [boardName]: addNewTask });
   };
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful]);
-
   return (
     <form
-      className='bg-half-white rounded-2xl p-4 mt-5'
+      className='bg-half-white rounded-2xl p-4'
       onSubmit={handleSubmit(onSubmit)}>
       <div className='mb-4'>
         <textarea
-          className='placeholder:text-slate-400 bg-half-purple w-full border rounded-lg focus:outline-none text-sm min-h-[110px] p-[15px]'
+          className='placeholder:text-slate-400 bg-half-purple w-full border rounded-lg focus:outline-none text-sm min-h-[158px] p-[15px]'
           placeholder='Type in here...'
           {...register("inputText", { required: true })}></textarea>
       </div>
       <div className='mb-4 bg-half-white rounded-xl border-white border-2 flex justify-between'>
         <div className='p-2 flex-1 flex flex-col border-r-2 border-half-white'>
-          <div className='text-[11px] mb-2'>Important</div>
-          <div className='bg-half-white rounded-xl border-white border-2 p-2'>
+          <div className='text-[11px] font-medium mb-2'>Important</div>
+          <div className='bg-half-white rounded-xl border-white border-2 px-6 py-2'>
             <ToogleSwitch
               register={register}
               id='important'
-              isSubmitSuccessful={isSubmitSuccessful}
+              setRadioState={setRadioState}
+              radioState={radioState}
             />
           </div>
         </div>
 
         <div className='p-2 flex-1 flex flex-col'>
-          <div className='text-[11px] mb-2'>Urgent</div>
-          <div className='bg-half-white rounded-xl border-white border-2 p-2'>
+          <div className='text-[11px] font-medium mb-2'>Urgent</div>
+          <div className='bg-half-white rounded-xl border-white border-2 px-6 py-2'>
             <ToogleSwitch
               register={register}
               id='urgent'
-              isSubmitSuccessful={isSubmitSuccessful}
+              setRadioState={setRadioState}
+              radioState={radioState}
             />
           </div>
         </div>

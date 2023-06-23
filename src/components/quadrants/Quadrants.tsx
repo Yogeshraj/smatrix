@@ -1,17 +1,29 @@
 import { DragDropContext } from "react-beautiful-dnd";
 import Square from "./Square";
-import { boards } from "@/mockData/mockData";
 import { ColumnType } from "@/utils/enums";
+import { useEffect, useState } from "react";
+import Sidebar from "../sidebar/Sidebar";
 
-const Quadrants = ({ mainData, deleteTask, updateData }: any) => {
+const Quadrants = ({ mainData, deleteTask, updateData, boards }: any) => {
+  const [quadrantboards, setQuadrantBoards] = useState([]);
+
+  useEffect(() => {
+    setQuadrantBoards(boards);
+  }, [boards]);  
+
   const handleDeleteTask = (id: any, boardName: any) => {
     console.log(id, boardName);
     console.log(mainData);
     let deletedData = mainData[boardName].filter((res: any) => {
-      console.log(res);
       return res.id !== id;
     });
     deleteTask({ ...mainData, [boardName]: deletedData });
+  };
+
+  const completeTask = (id: any, boardName: any) => {
+    let mainDataCopy = mainData;
+    mainDataCopy[boardName].find((res: any) => res.id === id).completed = true;
+    updateData(mainDataCopy);
   };
 
   function handleOnDragEnd(result: any) {
@@ -68,11 +80,12 @@ const Quadrants = ({ mainData, deleteTask, updateData }: any) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className='grid grid-cols-2 gap-4 py-5'>
-        {boards.map((board, index) => {
+      <div className='grid grid-cols-3 gap-4 py-5'>
+        {quadrantboards?.map((board:any, index:number) => {
           return (
             <Square
               key={index}
+              index={index}
               color={board.boardColor}
               boardTitle={board.boardTitle}
               subtitle={board.boardSubtitle}
@@ -81,9 +94,11 @@ const Quadrants = ({ mainData, deleteTask, updateData }: any) => {
                 mainData[board.boardTitle as keyof typeof ColumnType]
               }
               deleteTask={handleDeleteTask}
+              completeTask={completeTask}
             />
           );
         })}
+        <Sidebar />
       </div>
     </DragDropContext>
   );
