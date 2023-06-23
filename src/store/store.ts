@@ -6,7 +6,38 @@ const useStore = create(
     (set: any) => ({
       websiteName: "Smatrix",
       
-      boards: ['Do', 'Schedule', 'Delegate', 'Limit'],
+      boards: [
+        {
+          boardID: 1,
+          boardTitle: "Do",
+          boardSubtitle: "Important & Urgent",
+          boardColor: "green",
+        },
+        {
+          boardID: 2,
+          boardTitle: "Schedule",
+          boardSubtitle: "Important but not Urgent",
+          boardColor: "blue",
+        },
+        {
+          boardID: 3,
+          boardTitle: "Delegate",
+          boardSubtitle: "Not Important but Urgent",
+          boardColor: "yellow",
+        },
+        {
+          boardID: 4,
+          boardTitle: "Limit",
+          boardSubtitle: "Not Important and not Urgent",
+          boardColor: "red",
+        },
+        {
+          boardID: 5,
+          boardTitle: "Later",
+          boardSubtitle: "Put it here decide later...",
+          boardColor: "half-purple",
+        },
+      ],
 
       mainData: [],
       snackbar: {

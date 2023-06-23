@@ -1,57 +1,69 @@
-import React, { useState, InputHTMLAttributes, FC, useEffect } from "react";
+import React, { InputHTMLAttributes, FC } from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   register: UseFormRegister<FieldValues>; // declare register props
-  isSubmitSuccessful: boolean
+  setRadioState: any;
+  radioState: any;
 }
 
-const ToogleSwitch: FC<InputProps> = ({ register, id, isSubmitSuccessful }) => {
-  const [enabled, setEnabled] = useState(false);
-
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      setEnabled(false);
-    }
-  }, [isSubmitSuccessful])
-
+const ToogleSwitch: FC<InputProps> = ({
+  register,
+  id,
+  setRadioState,
+  radioState,
+}) => {
+  const handleRadioChange = (radioNumber: number) => {
+    setRadioState({ ...radioState, [id]: radioNumber });
+  };
 
   return (
-    <div className='relative flex flex-col items-center justify-center overflow-hidden'>
-      <div className='flex items-center'>
-        <span className='mr-2 text-xs font-medium text-gray-900'>No</span>
-        <label className='inline-flex relative items-center cursor-pointer'>
-          <input
-            type='radio'
-            className='sr-only peer'
-            checked={enabled}
-            readOnly
-            {...register(id)}
-          />
-          <input
-            type='radio'
-            className='sr-only peer'
-            checked={enabled}
-            readOnly
-            {...register(id)}
-          />
-          <input
-            type='radio'
-            className='sr-only peer'
-            checked={enabled}
-            readOnly
-            {...register(id)}
-          />
-          <div
-            onClick={() => {
-              setEnabled(!enabled);
-            }}
-            className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
-        </label>
-        <span className='ml-2 text-xs font-medium text-gray-900'>Yes</span>
+    <div className='relative flex items-center justify-between overflow-hidden'>
+      <span className='text-[#C9C3DC] font-semibold text-sm'>Yes</span>
+      <div className='switch'>
+        <input
+          id={`${id}_one`}
+          type='radio'
+          value='yes'
+          defaultChecked={radioState[id] === 1}
+          {...register(id)}
+          onClick={() => handleRadioChange(1)}
+        />
+        <label
+          htmlFor={`${id}_one`}
+          className='switch__label'
+          onClick={() => handleRadioChange(1)}></label>
+
+        <input
+          id={`${id}_two`}
+          type='radio'
+          value='neutral'
+          defaultChecked={radioState[id] === 2}
+          {...register(id)}
+          onClick={() => handleRadioChange(2)}
+        />
+        <label
+          htmlFor={`${id}_two`}
+          className='switch__label'
+          onClick={() => handleRadioChange(2)}></label>
+
+        <input
+          id={`${id}_three`}
+          type='radio'
+          value='no'
+          defaultChecked={radioState[id] === 3}
+          {...register(id)}
+          onClick={() => handleRadioChange(3)}
+        />
+        <label
+          htmlFor={`${id}_three`}
+          className='switch__label'
+          onClick={() => handleRadioChange(3)}></label>
+
+        <div className='switch__indicator'></div>
       </div>
+      <span className='text-[#C9C3DC] font-semibold text-sm'>No</span>
     </div>
   );
 };

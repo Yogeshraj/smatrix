@@ -4,8 +4,17 @@ import SelectIcon from "../Icons/SelectIcon";
 import RemoveIcon from "../Icons/RemoveIcon";
 import { SquareProps } from "@/interfaces/interfaces";
 import { Draggable, Droppable } from "react-beautiful-dnd";
+import SelectedIcon from "../Icons/SelectedIcon";
 
-const Square: FC<SquareProps> = ({ color, boardTitle, subtitle, tasks, deleteTask }) => {
+const Square: FC<SquareProps> = ({
+  color,
+  boardTitle,
+  subtitle,
+  tasks,
+  deleteTask,
+  completeTask,
+  index,
+}) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -14,7 +23,9 @@ const Square: FC<SquareProps> = ({ color, boardTitle, subtitle, tasks, deleteTas
 
   return (
     <div
-      className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 min-h-[402px]`}>
+      className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 min-h-[402px] ${
+        index === 4 ? `last-square bg-${color}` : ""
+      }`}>
       <div className='flex flex-col'>
         <div
           className={`flex border-b border-${color}-400 justify-between p-2 pt-0`}>
@@ -29,29 +40,47 @@ const Square: FC<SquareProps> = ({ color, boardTitle, subtitle, tasks, deleteTas
                 className='characters min-h-[347px]'
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
-                {tasks?.map(({ id, title }, index) => {
-                    return (
-                      <Draggable key={id} draggableId={id.toString()} index={index}>
-                        {(provided) => (
-                          <div
-                            className='rounded-[10px] border-white border-2 bg-half-white p-1.5 my-2.5 flex justify-between cursor-grab'
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}>
-                            <div className='flex'>
-                              <DragIcon className='mr-3.5 cursor-grab' />
-                              <div className='half-black'>{title}</div>
-                            </div>
-
-                            <div className='flex'>
-                              <SelectIcon className='mr-2.5 cursor-pointer' />
-                              <RemoveIcon className='cursor-pointer' onClick={()=>deleteTask(id, boardTitle)} />
+                {tasks?.map(({ id, title, completed }, index) => {
+                  return (
+                    <Draggable
+                      key={id}
+                      draggableId={id.toString()}
+                      index={index}>
+                      {(provided) => (
+                        <div
+                          className='rounded-[10px] border-white border-2 bg-half-white p-1.5 my-2.5 flex justify-between cursor-grab'
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}>
+                          <div className='flex flex-1'>
+                            <DragIcon className='mr-2.5 cursor-grab' />
+                            <div
+                              className={`half-black flex-1 mr-2.5 strikethrough relative ${
+                                completed ? "completed rounded-lg pl-2" : ""
+                              }`}>
+                              {title}
                             </div>
                           </div>
-                        )}
-                      </Draggable>
-                    );
-                  })}
+
+                          <div className='flex'>
+                            {!completed ? (
+                              <SelectIcon
+                                className='mr-2.5 cursor-pointer'
+                                onClick={() => completeTask(id, boardTitle)}
+                              />
+                            ) : (
+                              <SelectedIcon className='mr-2.5' />
+                            )}
+                            <RemoveIcon
+                              className='cursor-pointer'
+                              onClick={() => deleteTask(id, boardTitle)}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
                 {provided.placeholder}
               </div>
             )}
