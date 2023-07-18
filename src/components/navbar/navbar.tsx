@@ -27,7 +27,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* <Link href='/all-tasks'>
+            <Link href='/all-tasks'>
               <div
                 className={`${
                   router?.route === "/all-tasks" ? "active" : ""
@@ -35,7 +35,7 @@ const Navbar = () => {
                 <TaskIcon />
                 <span className='pl-2.5 font-semibold'>All Task</span>
               </div>
-            </Link> */}
+            </Link>
           </div>
 
           {/* TODO: Login Menu */}

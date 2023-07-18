@@ -24,7 +24,7 @@ const Square: FC<SquareProps> = ({
   return (
     <div
       className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 min-h-[402px] ${
-        index === 4 ? `last-square bg-${color}` : ""
+        index === 4 ? `md:row-start-1 md:row-end-2 md:col-start-3 bg-${color}` : ""
       }`}>
       <div className='flex flex-col'>
         <div
@@ -37,7 +37,7 @@ const Square: FC<SquareProps> = ({
           <Droppable droppableId={boardTitle}>
             {(provided) => (
               <div
-                className='characters min-h-[347px]'
+                className='characters min-h-[347px] max-h-[347px] overflow-y-auto'
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
                 {tasks?.map(({ id, title, completed }, index) => {

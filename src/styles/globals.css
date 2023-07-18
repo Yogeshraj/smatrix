@@ -118,8 +118,3 @@ body {
 .switch input[type=radio]:not(:checked), .switch input[type=radio]:checked {
   display: none;
 }
-.last-square {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 3;
-}

@@ -15,10 +15,12 @@ module.exports = {
       colors: {
         purple: "#E5DEFF",
         grey: "#928F99",
+        "medium-grey": "#E2E2EA",
         "meteorite-blue": "#2F2175",
         "half-white": "#ffffff80",
         "half-purple": "#5e52a724",
         "half-black": '#0D0533',
+        
         green: {
           100: "#E8FFEF",
           400: "#6BFCBB",

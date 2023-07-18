@@ -40,6 +40,7 @@ const useStore = create(
       ],
 
       mainData: [],
+      allTasks: [],
       snackbar: {
         show: false,
         content: "",
@@ -54,6 +55,23 @@ const useStore = create(
         console.log(result);
       },
 
+      updateAllTasks: (task: any) => {
+        set((state: any) => ({
+          ...state,
+          allTasks: [
+            ...state.allTasks,
+            task
+          ],
+        }));
+      },
+
+      updateDeletedAllTasks: (task: any) => {
+        set((state: any) => ({
+          ...state,
+          allTasks: task,
+        }));
+      },
+      
       updateData: (task: any) => {
         set((state: any) => ({
           ...state,

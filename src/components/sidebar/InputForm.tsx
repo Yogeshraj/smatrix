@@ -4,6 +4,7 @@ import AddIcon from "../Icons/AddIcon";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import useStore from "@/store/store";
+import getBoardName from "@/utils/getBoardName";
 
 const InputForm = () => {
   const {
@@ -13,7 +14,7 @@ const InputForm = () => {
     formState: { isSubmitSuccessful },
   } = useForm();
 
-  const { mainData, updateData }: any = useStore();
+  const { mainData, updateData, updateAllTasks, allTasks }: any = useStore();
 
   const [radioState, setRadioState] = useState({
     important: 2,
@@ -31,39 +32,22 @@ const InputForm = () => {
   }, [isSubmitSuccessful]);
 
   const onSubmit = (data: any) => {
-    let boardName;
     const { inputText, important, urgent } = data;
-
-    if (important === "yes" && urgent === "yes") {
-      boardName = "Do";
-    } else if (important === "yes" && urgent === "no") {
-      boardName = "Schedule";
-    } else if (important === "no" && urgent === "yes") {
-      boardName = "Delegate";
-    } else if (important === "no" && urgent === "no") {
-      boardName = "Limit";
-    } else if (important === "yes" && urgent === "neutral") {
-      boardName = "Schedule";
-    } else if (important === "no" && urgent === "neutral") {
-      boardName = "Limit";
-    } else if (important === "neutral" && urgent === "yes") {
-      boardName = "Delegate";
-    } else if (important === "neutral" && urgent === "no") {
-      boardName = "Limit";
-    } else {
-      boardName = "Later";
-    }
+    let { boardName, boardID } = getBoardName(important, urgent);
 
     let addNewTask = [
       ...(mainData[boardName] || []),
       {
         id: uuidv4(),
-        title: inputText,
+        title: inputText.trim(),
         completed: false,
         boardName,
+        boardID,
+        createdDate: Date.now()
       },
     ];
     updateData({ ...mainData, [boardName]: addNewTask });
+    updateAllTasks(...addNewTask);
   };
 
   return (

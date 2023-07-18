@@ -4,20 +4,30 @@ import { ColumnType } from "@/utils/enums";
 import { useEffect, useState } from "react";
 import Sidebar from "../sidebar/Sidebar";
 
-const Quadrants = ({ mainData, deleteTask, updateData, boards }: any) => {
+const Quadrants = ({
+  mainData,
+  deleteTask,
+  updateData,
+  boards,
+  updateDeletedAllTasks,
+  allTasks,
+}: any) => {
   const [quadrantboards, setQuadrantBoards] = useState([]);
 
   useEffect(() => {
     setQuadrantBoards(boards);
-  }, [boards]);  
+  }, [boards]);
 
   const handleDeleteTask = (id: any, boardName: any) => {
-    console.log(id, boardName);
-    console.log(mainData);
     let deletedData = mainData[boardName].filter((res: any) => {
       return res.id !== id;
     });
     deleteTask({ ...mainData, [boardName]: deletedData });
+    
+    let updatedAllTasks = allTasks?.filter((res:any, index: number) => {
+      return res.id !== id;
+    });
+    updateDeletedAllTasks(updatedAllTasks);
   };
 
   const completeTask = (id: any, boardName: any) => {
@@ -80,8 +90,8 @@ const Quadrants = ({ mainData, deleteTask, updateData, boards }: any) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className='grid grid-cols-3 gap-4 py-5'>
-        {quadrantboards?.map((board:any, index:number) => {
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 py-5'>
+        {quadrantboards?.map((board: any, index: number) => {
           return (
             <Square
               key={index}
