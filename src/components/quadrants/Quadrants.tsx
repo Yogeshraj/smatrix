@@ -80,7 +80,7 @@ const Quadrants = ({ mainData, deleteTask, updateData, boards }: any) => {
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <div className='grid grid-cols-3 gap-4 py-5'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-5'>
         {quadrantboards?.map((board:any, index:number) => {
           return (
             <Square

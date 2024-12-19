@@ -1,1 +1,0 @@
-const MONGODB_URI = 'mongodb+srv://yogeshrajkabilan:Welc0me@smatrix.4jcli8u.mongodb.net/test'
