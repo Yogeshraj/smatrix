@@ -3,14 +3,21 @@ import SnackbarLayout from "@/components/snackbar/SnackbarLayout";
 import useStore from "@/store/store";
 
 export default function Home() {
-  const { mainData, deleteTask, snackbar, resetSnackbar, updateData, boards }: any = useStore();
+  const {
+    mainData,
+    deleteTask,
+    snackbar,
+    resetSnackbar,
+    updateData,
+    boards,
+  }: any = useStore();
 
   if (!mainData) {
     return "Loading";
   }
 
   return (
-    <div className='md:container container'>
+    <div className='container'>
       <div className='grid  gap-4'>
         <Quadrants
           mainData={mainData}
@@ -19,7 +26,12 @@ export default function Home() {
           boards={boards}
         />
       </div>
-      <SnackbarLayout snackbarProperties={snackbar} resetSnackbar={resetSnackbar} />
+      {snackbar.show && (
+        <SnackbarLayout
+          snackbarProperties={snackbar}
+          resetSnackbar={resetSnackbar}
+        />
+      )}
     </div>
   );
 }

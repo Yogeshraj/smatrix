@@ -37,7 +37,7 @@ const Square: FC<SquareProps> = ({
           <Droppable droppableId={boardTitle}>
             {(provided) => (
               <div
-                className='characters min-h-[347px]'
+                className='characters lg:min-h-[347px]'
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
                 {tasks?.map(({ id, title, completed }, index) => {

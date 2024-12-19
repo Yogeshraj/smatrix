@@ -17,8 +17,8 @@ module.exports = {
         grey: "#928F99",
         "meteorite-blue": "#2F2175",
         "half-white": "#ffffff80",
-        "half-purple": "#5e52a724",
-        "half-black": '#0D0533',
+        "half-purple": "#e8e6f3",
+        "half-black": "#0D0533",
         green: {
           100: "#E8FFEF",
           400: "#6BFCBB",
@@ -42,6 +42,11 @@ module.exports = {
           400: "#FFDAD8",
           700: "#A43A3C",
         },
+        // "half-purple": {
+        //   100: "#FFF8F7",
+        //   400: "#e8e6f3",
+        //   700: "#A43A3C",
+        // },
       },
       boxShadow: {
         default: "inset 0px -1px 0px #E2E2EA",
