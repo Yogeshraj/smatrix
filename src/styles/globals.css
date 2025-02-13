@@ -83,8 +83,25 @@ body {
   transition: color 200ms ease-out;
   z-index: 1;
 }
-.switch__label:hover {
+/* .switch__label:hover {
   color: white;
+} */
+
+.switch__left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.switch__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.switch input:first-of-type:checked + label:first-of-type {
+  color: #006C49;
+}
+.switch input:last-of-type:checked + label:last-of-type {
+  color: #A43A3C;
 }
 .switch__indicator {
   width: 20px;
