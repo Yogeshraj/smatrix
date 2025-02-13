@@ -19,7 +19,7 @@ const ToogleSwitch: FC<InputProps> = ({
   };
 
   return (
-    <div className='relative flex items-center overflow-hidden justify-center xl:justify-between gap-5 xl:gap-0'>
+    <div className='relative flex items-center overflow-hidden justify-center gap-5'>
       <span className='text-[#C9C3DC] font-semibold text-sm'>Yes</span>
       <div className='switch'>
         <input

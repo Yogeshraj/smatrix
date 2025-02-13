@@ -81,7 +81,7 @@ const InputForm = () => {
       <div className='bg-half-white rounded-xl border-white border-2 flex justify-between flex-col xl:flex-row'>
         <div className='p-2 flex-1 flex flex-col border-r-2 border-half-white'>
           <div className='text-[11px] font-medium mb-2'>Important</div>
-          <div className='bg-half-white rounded-xl border-white border-2 px-6 py-2'>
+          <div className='bg-half-white rounded-xl border-white border-2 py-2'>
             <ToogleSwitch
               register={register}
               id='important'
@@ -93,7 +93,7 @@ const InputForm = () => {
 
         <div className='p-2 flex-1 flex flex-col'>
           <div className='text-[11px] font-medium mb-2'>Urgent</div>
-          <div className='bg-half-white rounded-xl border-white border-2 px-6 py-2'>
+          <div className='bg-half-white rounded-xl border-white border-2 py-2'>
             <ToogleSwitch
               register={register}
               id='urgent'
