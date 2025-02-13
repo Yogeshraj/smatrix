@@ -19,7 +19,7 @@ const ToogleSwitch: FC<InputProps> = ({
   };
 
   return (
-    <div className='relative flex items-center justify-between overflow-hidden'>
+    <div className='relative flex items-center overflow-hidden justify-center xl:justify-between gap-5 xl:gap-0'>
       <span className='text-[#C9C3DC] font-semibold text-sm'>Yes</span>
       <div className='switch'>
         <input
@@ -32,8 +32,9 @@ const ToogleSwitch: FC<InputProps> = ({
         />
         <label
           htmlFor={`${id}_one`}
-          className='switch__label'
-          onClick={() => handleRadioChange(1)}></label>
+          className='switch__label switch__left absolute !w-[120%] left-[-43px]'
+          onClick={() => handleRadioChange(1)}
+        ></label>
 
         <input
           id={`${id}_two`}
@@ -45,8 +46,9 @@ const ToogleSwitch: FC<InputProps> = ({
         />
         <label
           htmlFor={`${id}_two`}
-          className='switch__label'
-          onClick={() => handleRadioChange(2)}></label>
+          className='switch__label switch__center m-auto'
+          onClick={() => handleRadioChange(2)}
+        ></label>
 
         <input
           id={`${id}_three`}
@@ -58,8 +60,9 @@ const ToogleSwitch: FC<InputProps> = ({
         />
         <label
           htmlFor={`${id}_three`}
-          className='switch__label'
-          onClick={() => handleRadioChange(3)}></label>
+          className='switch__label switch__right absolute !w-[120%] right-[-43px]'
+          onClick={() => handleRadioChange(3)}
+        ></label>
 
         <div className='switch__indicator'></div>
       </div>
