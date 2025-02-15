@@ -1,17 +1,28 @@
+# Smatrix - Your Productivity Simplified
 
-# Smatrix
+Smatrix is a task management app designed around the Eisenhower Matrix, empowering users to make quick and effective decisions about their tasks. It helps you:
 
-This app involves making a quick decision about what to act on now either by doing it yourself or delegating to someone else, what to act on in the future, or what to drop from your to-do list.
+- Do: Focus on urgent and important tasks.
+- Schedule: Plan important but non-urgent tasks for the future.
+- Delegate: Assign urgent but less important tasks to others.
+- Limit: Minimize unimportant and non-urgent tasks.
+- Later: Temporarily park undecided tasks.
 
-**How to Apply this Technique** <br />
-We all have an ever-growing to-do list, and PMs are certainly no exception. Because our responsibilities and demands limit our time, we have to choose carefully how we spend this precious resource to make sure that we align our tasks with our larger goals.
+# Why Smatrix?
 
-To get started with this technique, look at your to-do list at the beginning of the workday and assess which tasks can be done quickly right now either by you or someone else on your team, which ones to drop altogether, and which essential tasks to defer for now.
+We all face growing to-do lists. Smatrix helps you focus on what matters, aligning your tasks with your goals and maximizing your productivity.
 
-Give it a try to the beta version https://smatrix.netlify.app/ (beta)
+# How to Use Smatrix
+
+1. Start your day by assessing your to-do list.
+2. Enter tasks and assign them to appropriate quadrants using easy radio buttons.
+3. Take control: do, schedule, delegate, or remove distractions.
+
+# Ready to Try?
+
+Check out the beta version: https://smatrix.netlify.app/. (beta)
 
 ![MIT License](https://img.shields.io/badge/pre--production-beta-yellow)
-
 
 ## Tech Stack
 
@@ -24,8 +35,9 @@ Give it a try to the beta version https://smatrix.netlify.app/ (beta)
 ## Deployed on Netlify
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f274dc6d-3739-4081-8803-6f4646714556/deploy-status)](https://app.netlify.com/sites/smatrix/deploys)
+
 ## Feedback
 
-Please send your valuable feedbacks in twitter 
+Please send your valuable feedbacks in twitter
 
 [![Twitter Contact](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/Yogesh_Raj_46)

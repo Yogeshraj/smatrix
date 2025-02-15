@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <div className='container'>
+    <div className='container min-h-min'>
       <div className='grid  gap-4'>
         <Quadrants
           mainData={mainData}

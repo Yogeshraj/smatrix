@@ -23,12 +23,14 @@ const Square: FC<SquareProps> = ({
 
   return (
     <div
-      className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 min-h-[402px] ${
-        index === 4 ? `last-square bg-${color}` : ""
-      }`}>
+      className={`rounded-2xl bg-${color}-100 border border-${color}-400 p-2.5 ${
+        index === 4 ? `last-square` : ""
+      }`}
+    >
       <div className='flex flex-col'>
         <div
-          className={`flex border-b border-${color}-400 justify-between p-2 pt-0`}>
+          className={`flex border-b border-${color}-400 justify-between p-2 pt-0`}
+        >
           <div className={`text-${color}-700 font-semibold`}>{boardTitle}</div>
           <div className={`text-${color}-700`}>{subtitle}</div>
         </div>
@@ -37,27 +39,31 @@ const Square: FC<SquareProps> = ({
           <Droppable droppableId={boardTitle}>
             {(provided) => (
               <div
-                className='characters lg:min-h-[347px]'
+                className='characters min-h-[32vh] max-h-[32vh] overflow-hidden overflow-y-scroll'
                 {...provided.droppableProps}
-                ref={provided.innerRef}>
+                ref={provided.innerRef}
+              >
                 {tasks?.map(({ id, title, completed }, index) => {
                   return (
                     <Draggable
                       key={id}
                       draggableId={id.toString()}
-                      index={index}>
+                      index={index}
+                    >
                       {(provided) => (
                         <div
                           className='rounded-[10px] border-white border-2 bg-half-white p-1.5 my-2.5 flex justify-between cursor-grab'
                           ref={provided.innerRef}
                           {...provided.draggableProps}
-                          {...provided.dragHandleProps}>
+                          {...provided.dragHandleProps}
+                        >
                           <div className='flex flex-1'>
                             <DragIcon className='mr-2.5 cursor-grab' />
                             <div
                               className={`half-black flex-1 mr-2.5 strikethrough relative ${
                                 completed ? "completed rounded-lg pl-2" : ""
-                              }`}>
+                              }`}
+                            >
                               {title}
                             </div>
                           </div>

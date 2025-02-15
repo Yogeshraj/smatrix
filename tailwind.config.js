@@ -42,11 +42,11 @@ module.exports = {
           400: "#FFDAD8",
           700: "#A43A3C",
         },
-        // "half-purple": {
-        //   100: "#FFF8F7",
-        //   400: "#e8e6f3",
-        //   700: "#A43A3C",
-        // },
+        "half-purple": {
+          100: "#e8e6f3",
+          400: "#b5acd6",
+          700: "#8373b8",
+        },
       },
       boxShadow: {
         default: "inset 0px -1px 0px #E2E2EA",
@@ -60,7 +60,8 @@ module.exports = {
   plugins: [],
   safelist: [
     {
-      pattern: /(bg|text|border)-(red|green|blue|yellow)-(100|400|700)/,
+      pattern:
+        /(bg|text|border)-(red|green|blue|yellow|half-purple)-(100|400|700)/,
     },
   ],
 };

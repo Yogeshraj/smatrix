@@ -5,7 +5,7 @@ const useStore = create(
   persist(
     (set: any) => ({
       websiteName: "Smatrix",
-      
+
       boards: [
         {
           boardID: 1,
@@ -46,13 +46,13 @@ const useStore = create(
         type: "",
       },
 
-      async fetchData() {
-        const data = await fetch(
-          "https://62b59b5e42c6473c4b362f18.mockapi.io/users"
-        );
-        const result = await data.json();
-        console.log(result);
-      },
+      // async fetchData() {
+      //   const data = await fetch(
+      //     "https://62b59b5e42c6473c4b362f18.mockapi.io/users"
+      //   );
+      //   const result = await data.json();
+      //   console.log(result);
+      // },
 
       updateData: (task: any) => {
         set((state: any) => ({
@@ -60,7 +60,7 @@ const useStore = create(
           mainData: task,
           snackbar: {
             show: true,
-            content: "Success added!",
+            content: "Added Successfully!",
             type: "success",
           },
         }));

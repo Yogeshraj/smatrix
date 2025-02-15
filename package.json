@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "standard-version"
   },
   "dependencies": {
     "@types/node": "18.15.11",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^13.1.4",
-    "@types/uuid": "^9.0.1"
+    "@types/uuid": "^9.0.1",
+    "standard-version": "^9.5.0"
   }
 }
